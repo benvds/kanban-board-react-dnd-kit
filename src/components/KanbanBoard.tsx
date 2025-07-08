@@ -72,7 +72,7 @@ const KanbanBoard = () => {
             if(task.id !== id) return task;
             return{...task, content}
         });
-        
+
         setTasks(() => {
             taskDragEnd();
             return newTasks;
@@ -92,8 +92,6 @@ const KanbanBoard = () => {
     }
 
     function onDragEnd (event: DragEndEvent) {
-        // setActiveColumn(null);
-        // setActiveTask(null);
         const { active, over } = event;
         if (!over) return;
 
