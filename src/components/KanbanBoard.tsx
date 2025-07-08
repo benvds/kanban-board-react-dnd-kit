@@ -62,12 +62,21 @@ const KanbanBoard = () => {
         setTasks(newTasks)
     }
 
+    function taskDragEnd () {
+        setActiveColumn(null);
+        setActiveTask(null);
+    }
+
     function updateTask (id:Id, content:string) {
         const newTasks = tasks.map((task)=>{
             if(task.id !== id) return task;
             return{...task, content}
-        })
-        setTasks(newTasks)
+        });
+        
+        setTasks(() => {
+            taskDragEnd();
+            return newTasks;
+        });
     }
 
     function onDragStart (event: DragStartEvent) {
@@ -83,8 +92,8 @@ const KanbanBoard = () => {
     }
 
     function onDragEnd (event: DragEndEvent) {
-        setActiveColumn(null);
-        setActiveTask(null);
+        // setActiveColumn(null);
+        // setActiveTask(null);
         const { active, over } = event;
         if (!over) return;
 
